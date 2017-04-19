@@ -12,6 +12,7 @@ def getpassagelist(request):
         resultlist = []
         for item in passagelist:
             resultlist.append({
+                    'author':item.m_user.nickname,
                     'title':item.title,
                     'time':str(item.time),
                     'id':item.id,
@@ -34,6 +35,7 @@ def getpassage(request):
                 'result':'succeed',
                 'passage':{
                     'id':passage.id,
+                    'author':passage.m_user.nickname,
                     'title':passage.title,
                     'body':passage.body,
                     'time':str(passage.time),

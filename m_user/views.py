@@ -110,19 +110,34 @@ def modify(request):
                 }))                
             modifyData = request.POST.get('modifydata')
             try:
-                modifyData = json.loads(modifyData)
+                if modifyData:
+                    modifyData = json.loads(modifyData)
+                else:
+                    return HttpResponse(json.dumps({
+                        'action':'modify',
+                        'result':'error',
+                        'errorResult':'modifyDataDoNotExists',
+                    }))                     
             except Exception,e:
                 return HttpResponse(json.dumps({
                     'action':'modify',
                     'result':'error',
                     'errorResult':e,
                 }))                
-            if modifyData.get('college'):
-                user.college = modifyData.get('college')
-            if modifyData.get('studentid'):
-                user.studentid = modifyData.get('studentid')
+            if modifyData.get('nickname'):
+                user.nickname = modifyData.get('nickname')
             if modifyData.get('truename'):
                 user.truename = modifyData.get('truename')
+            if modifyData.get('tel'):
+                user.tel = modifyData.get('tel')
+            if modifyData.get('email'):
+                user.email = modifyData.get('email')
+            if modifyData.get('address'):
+                user.address = modifyData.get('address')
+            if modifyData.get('page'):
+                user.page = modifyData.get('page')  
+            if modifyData.get('information'):
+                user.information = modifyData.get('information')                                                           
             user.save()
             return HttpResponse(json.dumps({
                 'action':'modify',
