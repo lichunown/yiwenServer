@@ -1,11 +1,11 @@
 # -*- coding:utf-8 -*-
 from __future__ import unicode_literals
-from django.utils.encoding import smart_unicode
+# from django.utils.encoding import smart_unicode
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.utils import timezone
-from django.utils.encoding import smart_unicode
+
 
 
 USERCHOICES = (
@@ -31,8 +31,8 @@ class m_User(models.Model):
     information = models.TextField(blank=True,default=None,null=True)
     bindQQ = models.CharField(max_length=20,blank=True,default=None,null=True)
     bindMobilephone = models.CharField(max_length=11,blank=True,default=None,null=True)
-    def __unicode__(self):
-        return smart_unicode(self.username)
+    # def __unicode__(self):
+    #     return smart_unicode(self.username)
 
 
 

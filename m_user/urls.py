@@ -20,9 +20,9 @@ urlpatterns = [
 
     # url(r'^invite/tutor/$',views.invitetutor,name='invitetutor'),
     # url(r'^invite/student/$',views.invitestudent,name='invitestudent'),
-    url(r'login$',views.login,name='login'),
-    url(r'signup$',views.signup,name='signup'),
-    url(r'logout$',views.logout,name='logout'),
-    url(r'modify$',views.modify,name='modify'),
-    url(r'getdata$',views.getdata,name='getdata'),
+    url(r'/login$',views.login,name='login'),
+    url(r'/signup$',views.signup,name='signup'),
+    url(r'/logout$',views.logout,name='logout'),
+    url(r'/modify$',views.modify,name='modify'),
+    url(r'/getdata$',views.getdata,name='getdata'),
 ]

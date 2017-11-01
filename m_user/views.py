@@ -8,7 +8,7 @@ from django.http import HttpResponse
 from m_user.token import userToken
 import json
 import hashlib,random  
-from models import m_User
+from .models import m_User
 
 class Encode(object):
     def __init__(self):
@@ -118,7 +118,7 @@ def modify(request):
                         'result':'error',
                         'errorResult':'modifyDataDoNotExists',
                     }))                     
-            except Exception,e:
+            except Exception as e:
                 return HttpResponse(json.dumps({
                     'action':'modify',
                     'result':'error',
