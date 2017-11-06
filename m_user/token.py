@@ -1,10 +1,11 @@
+#encoding:utf-8
 import hashlib,random  
 
 # m2 = hashlib.md5()   
 # m2.update(src)   
 # print m2.hexdigest()  
 
-class Token(object):
+class Token(object): 
     def __init__(self):
         self._loginTokens = {}
         self._logingUser = {}
