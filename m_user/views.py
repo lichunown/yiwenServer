@@ -123,21 +123,10 @@ def modify(request):
                     'action':'modify',
                     'result':'error',
                     'errorResult':e,
-                }))                
-            if modifyData.get('nickname'):
-                user.nickname = modifyData.get('nickname')
-            if modifyData.get('truename'):
-                user.truename = modifyData.get('truename')
-            if modifyData.get('tel'):
-                user.tel = modifyData.get('tel')
-            if modifyData.get('email'):
-                user.email = modifyData.get('email')
-            if modifyData.get('address'):
-                user.address = modifyData.get('address')
-            if modifyData.get('page'):
-                user.page = modifyData.get('page')  
-            if modifyData.get('information'):
-                user.information = modifyData.get('information')                                                           
+                }))     
+            for dataname in modifyData:
+                if user.__dict__.get(dataname):
+                    user.__dict__[dataname] = modifyData[dataname]                                                               
             user.save()
             return HttpResponse(json.dumps({
                 'action':'modify',
@@ -164,10 +153,18 @@ def getdata(request):
                     'action':'getuserdata',
                     'result':'succeed',
                     'data':{
-                        'college':user.college,
-                        'studentid':user.studentid,
+                        'isvip':user.isvip,
+                        'nickname':user.nickname,
                         'truename':user.truename,
-                        'iscar':user.iscar,
+                        'birthday':str(user.birthday),
+                        'sex':user.sex,
+                        'tel':user.tel,
+                        'email':user.email,      
+                        'address':user.address,
+                        'page':user.page,
+                        'information':user.information,     
+                        'bindQQ':user.bindQQ,
+                        'bindMobilephone':user.bindMobilephone,                                                        
                     },
                 }))
         # not user himself
@@ -178,9 +175,18 @@ def getdata(request):
                 'action':'getuserdata',
                 'result':'succeed',
                 'data':{
-                    'college':user.college,
-                    'truename':user.truename,
-                    'iscar':user.iscar,
+                        'isvip':user.isvip,
+                        'nickname':user.nickname,
+                        'truename':user.truename,
+                        'birthday':str(user.birthday),
+                        'sex':user.sex,
+                        'tel':user.tel,
+                        'email':user.email,      
+                        'address':user.address,
+                        'page':user.page,
+                        'information':user.information,     
+                        'bindQQ':user.bindQQ,
+                        'bindMobilephone':user.bindMobilephone, 
                 },
             }))
         else:

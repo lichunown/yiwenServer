@@ -1,15 +1,22 @@
 from django.db import models
-from m_user.models import m_User
 from django.utils import timezone
-# from django.utils.encoding import smart_unicode
 
-# Create your models here.
+
+    
+
+class Column(models.Model):
+    createuser = models.ForeignKey('m_user.m_User')
+    createdate = models.DateTimeField(default=timezone.now)
+    infomation = models.TextField(blank=True,null=True)
 
 class Passage(models.Model):
-    m_user = models.ForeignKey(m_User)
+    m_user = models.ForeignKey('m_user.m_User')
+    column = models.ForeignKey('Column',blank = True,default=None)
     title = models.CharField(max_length=100)
     body = models.TextField()
     time = models.DateTimeField(default=timezone.now)
     # def __unicode__(self):
     #     return smart_unicode(self.title)    
+
+
 
