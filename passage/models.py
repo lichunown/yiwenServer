@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 
-    
+        
 
 class Column(models.Model):
     createuser = models.ForeignKey('m_user.m_User')
@@ -19,4 +19,4 @@ class Passage(models.Model):
     #     return smart_unicode(self.title)    
 
 
-
+    

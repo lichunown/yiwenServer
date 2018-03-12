@@ -14,7 +14,7 @@ class Token(object):
         self._md5.update((str(user.username)+str(random.random())).encode())
         token = str(self._md5.hexdigest())
         if self._logingUser.get(user):
-            print("重复登陆 %s"%user.username)
+            # print("重复登陆 %s"%user.username)
             del self._loginTokens[self._logingUser[user]]
         self._logingUser[user] = token
         self._loginTokens[token] = user
