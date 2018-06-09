@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from .message import tmpMessages, MessageData
-
-
+from m_user.token import userToken
+import json
 # Create your views here.
 @csrf_exempt
 def send(request):
@@ -12,22 +12,36 @@ def send(request):
         user = userToken.getUser(token)
         if user:
             data = request.POST.get('data')
+            action = request.POST.get('action')
             to = request.POST.get('toname')
-            
-            tmpMessages.addmessage()
-            newPassage = Passage()
-            newPassage.m_user = user
-            newPassage.title = request.POST.get('title')
-            newPassage.body = request.POST.get('body')
-            newPassage.save()
-            return HttpResponse(json.dumps({
-                'action':'savepassage',
-                'result':'succeed',
-                'id':newPassage.id,
-            }))       
+            if action=='send':
+                tmpMessages.addmessage(to, data)
+                return HttpResponse(json.dumps({
+                    'action':'sendmassage',
+                    'result':'succeed',
+                })) 
+            elif action=='get':
+                r = tmpMessages.getmeaages(user.username)
+                return HttpResponse(json.dumps({
+                    'action':'getmessage',
+                    'result':'succeed',
+                    'data':r,
+                })) 
+            elif action=='clean':
+                tmpMessages.cleanmessages(user.username)
+                return HttpResponse(json.dumps({
+                    'action':'cleanmessage',
+                    'result':'succeed',
+                }))
+            else:
+                return HttpResponse(json.dumps({
+                    'action':'message',
+                    'result':'error',
+                    'errorResult':'actionNotExist',
+                }))
         else:
             return HttpResponse(json.dumps({
-                'action':'send',
+                'action':'message',
                 'result':'error',
                 'errorResult':'TokenDoNotMatch',
             })) 
