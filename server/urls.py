@@ -20,5 +20,7 @@ urlpatterns = [
     url(r'^admin', include(admin.site.urls)),
     url(r'^user', include('m_user.urls')),
     url(r'^passage',include('passage.urls')),
+    url(r'^message',include('message.urls')),
+    url(r'^data',include('data.urls')),
     url(r'^$', views.index,name='index'),
 ]

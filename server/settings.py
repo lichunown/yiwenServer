@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'm_user',
     'passage',
     'question',
+    'data',
+    'message',
 )
 
 MIDDLEWARE_CLASSES = (
