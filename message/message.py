@@ -36,3 +36,17 @@ class Messages():
             return []
 
 tmpMessages = Messages()
+
+class History():
+    def __init__(self):
+        self.data = {}
+
+    def adddata(self,user,data):
+        if not self.data.get(user):
+            self.data[user] = []
+        self.data[user].append( (list(time.localtime(time.time())), data) )
+
+    def getdata(self, user):
+        return self.data.get(user)
+
+historydata = History()

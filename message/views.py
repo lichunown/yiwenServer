@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
-from .message import tmpMessages, MessageData
+from .message import tmpMessages, MessageData, historydata
 from m_user.token import userToken
 import json
 # Create your views here.
@@ -55,3 +55,36 @@ def send(request):
             })) 
     else:
         return HttpResponse('''Please use POST to visit. ''') 
+
+@csrf_exempt
+def history(request):
+    if request.method=='POST':
+        username = request.POST.get('username')
+        data = request.POST.get('data')
+        action = request.POST.get('action')
+        if not username:
+            return HttpResponse(json.dumps({
+                'action':'history',
+                'result':'error',
+                'errorResult':'usernameDoNotExist',
+            })) 
+
+    if action == "send":
+        historydata.adddata(username, data)
+        return HttpResponse(json.dumps({
+            'action':'addhistory',
+            'result':'succeed',
+        })) 
+    elif action == "get":
+        r = historydata.getdata(username)
+        return HttpResponse(json.dumps({
+            'action':'gethistory',
+            'result':'succeed',
+            'data':r
+        })) 
+    else:
+        return HttpResponse(json.dumps({
+            'action':'history',
+            'result':'error',
+            'errorResult':'actionNotExist',
+        }))
