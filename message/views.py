@@ -15,13 +15,14 @@ def send(request):
             action = request.POST.get('action')
             to = request.POST.get('toname')
             if action=='send':
-                tmpMessages.addmessage(to, data)
+                tmpMessages.addmessage(to, user.username, data)
                 return HttpResponse(json.dumps({
                     'action':'sendmassage',
                     'result':'succeed',
                 })) 
             elif action=='get':
-                r = tmpMessages.getmeaages(user.username)
+                getfrom = request.POST.get('froms')
+                r = tmpMessages.getmeaages(user.username, getfrom)
                 return HttpResponse(json.dumps({
                     'action':'getmessage',
                     'result':'succeed',
@@ -32,6 +33,13 @@ def send(request):
                 return HttpResponse(json.dumps({
                     'action':'cleanmessage',
                     'result':'succeed',
+                }))
+            elif action=='list':
+                r = tmpMessages.listsender(user.username)
+                return HttpResponse(json.dumps({
+                    'action':'cleanmessage',
+                    'result':'succeed',
+                    'data':r,
                 }))
             else:
                 return HttpResponse(json.dumps({
