@@ -36,6 +36,7 @@ def getpassage(request):
                 'passage':{
                     'id':passage.id,
                     'author':passage.m_user.nickname,
+                    'author_name':passage.m_user.username,
                     'title':passage.title,
                     'body':passage.body,
                     'time':str(passage.time),
