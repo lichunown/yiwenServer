@@ -11,7 +11,7 @@ class Column(models.Model):
 
 class Passage(models.Model):
     m_user = models.ForeignKey('m_user.m_User')
-    column = models.ForeignKey('Column',blank = True,default=None)
+    column = models.ForeignKey('Column', blank = True, null= True, default=None)
     title = models.CharField(max_length=100)
     body = models.TextField()
     time = models.DateTimeField(default=timezone.now)
